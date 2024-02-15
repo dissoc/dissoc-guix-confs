@@ -1,0 +1,30 @@
+#+TITLE:     dissoc-guix
+#+SUBTITLE:  collection of configuration files to be used with guix(systems)
+#+AUTHOR:    Justin Bishop
+#+DESCRIPTION: system configuration files for guix systems
+#+KEYWORDS:  guix, guix system, configuration, operating system
+#+LANGUAGE:  en
+
+* Summary
+dissoc-guix-confs are various configuration files to be used with guix
+
+* included configs
+** operating system definitions
+full guix system operating system configurations
+*** Workstations
+standard definitions to be used with 'guix system reconfigure'
+*** Servers
+definitions that can be used with 'guix deploy'
+** installation image definitions
+definitions to generate guix custom installer isos
+** nftables configuration
+nftable configuration files which include standard firewalls, port forwarding,
+port knocking, and cloudflare white listing
+** auditd configuration
+auditd rules. currently basic
+** udev rules
+udev rules for electronic devices and tablet
+** sysctl configuration
+standard systcl configuration files
+*** hardened
+hardened sysctl files based on security communities recommendations
