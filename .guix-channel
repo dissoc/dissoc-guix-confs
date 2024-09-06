@@ -1,0 +1,12 @@
+(channel
+ (version 0)
+ (dependencies
+  (channel
+   (name dissoc-guix)
+   (url "https://github.com/dissoc/dissoc-guix.git")
+   (branch "main")
+   (introduction
+    (channel-introduction
+     (version 0)
+     (commit "eeb7e6748f7db8dced413a513da1ea48ffcf7dd7")
+     (signer "95D3 7A96 EC54 79CE 6082  5831 81FF 5EC7 66ED 8C39"))))))
