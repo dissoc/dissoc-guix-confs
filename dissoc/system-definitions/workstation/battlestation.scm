@@ -1,269 +1,269 @@
-;;; Copyright © 2024 Justin Bishop <mail@dissoc.me>
+;; ;;; Copyright © 2024 Justin Bishop <mail@dissoc.me>
 
-;; NOTE: this definition will not build without access to private
-;; files stored in the "vault". Otherise it will require modification for
-;; use, especially where variables are used.
+;; ;; NOTE: this definition will not build without access to private
+;; ;; files stored in the "vault". Otherise it will require modification for
+;; ;; use, especially where variables are used.
 
-(define-module (dissoc system-definitions workstation battlestation)
-  #:use-module (gnu packages terminals)
-  #:use-module (gnu packages wm)
-  #:use-module (gnu packages fonts)
-  #:use-module (gnu services)
-  #:use-module (gnu packages)
-  #:use-module (gnu bootloader)
-  #:use-module (gnu bootloader grub)
-  #:use-module (gnu system)
-  #:use-module (gnu system uuid)
-  ;;#:use-module (srfi srfi-9 gnu)
-  #:use-module (gnu system keyboard)
-  #:use-module (gnu system accounts)
-  #:use-module (gnu system file-systems)
-  #:use-module (gnu system mapped-devices)
-  #:use-module (gnu system shadow)
-  #:use-module (guix gexp)
-  #:use-module (srfi srfi-1)
-  #:use-module (dissoc confs nftables clouldflare)
-  #:use-module (dissoc confs nftables portknocking)
-  #:use-module (dissoc confs udev rules)
-  #:use-module (nongnu packages linux)
-
-
-
-
-
-
-  ;; #:use-module (guix store)
-  ;; #:use-module (guix monads)
-  ;; #:use-module (guix records)
-  ;; #:use-module (guix combinators)
-  ;; #:use-module (guix derivations)
-  ;; #:use-module ((guix utils) #:select (%current-system target-hurd?))
-  ;; #:use-module (guix sets)
-  ;; #:use-module (guix gexp)
-  ;; #:use-module (srfi srfi-1)
-  ;; #:use-module (srfi srfi-9 gnu)
-  ;; #:use-module (srfi srfi-26)
-  ;; #:use-module (srfi srfi-34)
-  ;; #:use-module (srfi srfi-71)
-  ;; #:use-module (ice-9 match)
-  ;; #:use-module (ice-9 vlist)
+;; (define-module (dissoc system-definitions workstation battlestation)
+;;   #:use-module (gnu packages terminals)
+;;   #:use-module (gnu packages wm)
+;;   #:use-module (gnu packages fonts)
+;;   #:use-module (gnu services)
+;;   #:use-module (gnu packages)
+;;   #:use-module (gnu bootloader)
+;;   #:use-module (gnu bootloader grub)
+;;   #:use-module (gnu system)
+;;   #:use-module (gnu system uuid)
+;;   ;;#:use-module (srfi srfi-9 gnu)
+;;   #:use-module (gnu system keyboard)
+;;   #:use-module (gnu system accounts)
+;;   #:use-module (gnu system file-systems)
+;;   #:use-module (gnu system mapped-devices)
+;;   #:use-module (gnu system shadow)
+;;   #:use-module (guix gexp)
+;;   #:use-module (srfi srfi-1)
+;;   #:use-module (dissoc confs nftables clouldflare)
+;;   #:use-module (dissoc confs nftables portknocking)
+;;   #:use-module (dissoc confs udev rules)
+;;   #:use-module (nongnu packages linux)
 
 
 
 
 
-;;  #:use-module (gnu)
-  ;; #:use-module
-  ;; #:use-module
-  ;; #:use-module
-  ;; #:use-module
-  ;; #:use-module
-  ;; #:use-module
 
-  )
+;;   ;; #:use-module (guix store)
+;;   ;; #:use-module (guix monads)
+;;   ;; #:use-module (guix records)
+;;   ;; #:use-module (guix combinators)
+;;   ;; #:use-module (guix derivations)
+;;   ;; #:use-module ((guix utils) #:select (%current-system target-hurd?))
+;;   ;; #:use-module (guix sets)
+;;   ;; #:use-module (guix gexp)
+;;   ;; #:use-module (srfi srfi-1)
+;;   ;; #:use-module (srfi srfi-9 gnu)
+;;   ;; #:use-module (srfi srfi-26)
+;;   ;; #:use-module (srfi srfi-34)
+;;   ;; #:use-module (srfi srfi-71)
+;;   ;; #:use-module (ice-9 match)
+;;   ;; #:use-module (ice-9 vlist)
 
 
 
-;; (use-modules
-;;  (gnu packages terminals)
-;;  (gnu packages wm)
-;;  (gnu services desktop)
-;;  (gnu system setuid)
-;;  (gnu)
-;;  ;; (nongnu packages linux)
-;;  ;; (nongnu system linux-initrd)
-;;  (srfi srfi-1))
-;; (use-package-modules fonts lisp-xyz cups)
-;; (use-service-modules admin
-;;                      audio
-;;                      auditd
-;;                      avahi
-;;                      base
-;;                      certbot
-;;                      cups
-;;                      databases
-;;                      dbus
-;;                      desktop
-;;                      docker
-;;                      monitoring
-;;                      networking
-;;                      nix
-;;                      sound
-;;                      ssh
-;;                      sysctl
-;;                      syncthing
-;;                      virtualization
-;;                      vpn
-;;                      web
-;;                      xorg)
 
-;; this is where system variables are store. i.g. ip address
-(load "/mnt/vault/configs/systems/battlestation.scm")
-(load "../../confs/nftables/clouldflare.scm")
 
-(define %nftables-rules
-  "# A simple and safe firewall
-define VPN_ALLOW = { 75.108.123.151 }
-define VPN_PORT = 9993
-table inet filter {
+;; ;;  #:use-module (gnu)
+;;   ;; #:use-module
+;;   ;; #:use-module
+;;   ;; #:use-module
+;;   ;; #:use-module
+;;   ;; #:use-module
+;;   ;; #:use-module
 
-  # create the set for blocked
-  # ipv4 addresses to be added
-  # via libnftables
-  set blocked_ipv4 {
-    typeof ip daddr
-  }
+;;   )
 
-  chain input {
-    type filter hook input priority 0; policy drop;
 
-    # early drop of invalid connections
-    ct state invalid drop
 
-    # drop the connections from the blocklist
-    ip saddr @blocked_ipv4 drop
-    # allow established/related connections
-    ct state { established, related } accept
+;; ;; (use-modules
+;; ;;  (gnu packages terminals)
+;; ;;  (gnu packages wm)
+;; ;;  (gnu services desktop)
+;; ;;  (gnu system setuid)
+;; ;;  (gnu)
+;; ;;  ;; (nongnu packages linux)
+;; ;;  ;; (nongnu system linux-initrd)
+;; ;;  (srfi srfi-1))
+;; ;; (use-package-modules fonts lisp-xyz cups)
+;; ;; (use-service-modules admin
+;; ;;                      audio
+;; ;;                      auditd
+;; ;;                      avahi
+;; ;;                      base
+;; ;;                      certbot
+;; ;;                      cups
+;; ;;                      databases
+;; ;;                      dbus
+;; ;;                      desktop
+;; ;;                      docker
+;; ;;                      monitoring
+;; ;;                      networking
+;; ;;                      nix
+;; ;;                      sound
+;; ;;                      ssh
+;; ;;                      sysctl
+;; ;;                      syncthing
+;; ;;                      virtualization
+;; ;;                      vpn
+;; ;;                      web
+;; ;;                      xorg)
 
-    # allow from loopback
-    iifname lo accept
+;; ;; this is where system variables are store. i.g. ip address
+;; (load "/mnt/vault/configs/systems/battlestation.scm")
+;; (load "../../confs/nftables/clouldflare.scm")
 
-    # allow icmp
-    # ip protocol icmp accept
-    # ip6 nexthdr icmpv6 accept
+;; (define %nftables-rules
+;;   "# A simple and safe firewall
+;; define VPN_ALLOW = { 75.108.123.151 }
+;; define VPN_PORT = 9993
+;; table inet filter {
 
-    # allow ssh
-    tcp dport ssh accept
+;;   # create the set for blocked
+;;   # ipv4 addresses to be added
+;;   # via libnftables
+;;   set blocked_ipv4 {
+;;     typeof ip daddr
+;;   }
 
-    # allow vpn connections from
-    # whitelisted set
-    udp dport { $VPN_PORT } ip saddr $VPN_ALLOW accept
-    # reject everything else
-    # reject with icmpx type port-unreachable
-    # in some cases drop can be better than reject
-    # this can prevent a response going to a spoofed IP
-    drop
-  }
-  chain forward {
-    type filter hook forward priority 0; policy drop;
-  }
-  chain output {
-    type filter hook output priority 0; policy accept;
-  }
-}")
+;;   chain input {
+;;     type filter hook input priority 0; policy drop;
 
-(define %nftables-ruleset
-  (plain-file "nftables.conf"
-              (string-join (list %nftables-rules
-                                 %ntables-portknocking) "\n")))
+;;     # early drop of invalid connections
+;;     ct state invalid drop
 
-(define %gaomon-m10k-xorg-file
-  "Identifier \"Tablet\"
-  Driver \"wacom\"
-  MatchDevicePath \"/dev/input/event*\"
-  MatchUSBID \"256c:0064\"
-  EndSection")
+;;     # drop the connections from the blocklist
+;;     ip saddr @blocked_ipv4 drop
+;;     # allow established/related connections
+;;     ct state { established, related } accept
 
-(define (customize-services services)
-  ((compose (lambda (s)
-              (remove
-               (lambda (service)
-                 (or (eq? (service-kind service) gdm-service-type)
-                     (eq? (service-kind service) sysctl-service-type)
-                     (eq? (service-kind service) network-manager-service-type)))
-               s))
-            (lambda (s)
-              (modify-services
-               s
-               (udev-service-type
-                config =>
-                (udev-configuration
-                 (inherit config)
-                 (rules
-                  (append
-                   (udev-configuration-rules config)
-                   (list %gaomon-m10k-udev-rule
-                         %ucore-tracer-udev-rule
-                         %lilygo-ttgo-udev-rule
-                         %de-5000-udev-rule)))))))
-            (lambda (s)
-              (modify-services
-               s
-               (guix-service-type
-                config =>
-                (guix-configuration
-                 (inherit config)
-                 (extra-options
-                  '("--cores=10"))
-                 (authorized-keys
-                  (append
-                   (guix-configuration-authorized-keys config)
-                   (list (local-file "/etc/guix/signing-key.pub")))))))))
-   services))
+;;     # allow from loopback
+;;     iifname lo accept
 
-(operating-system
- (locale "en_US.utf8")
- (timezone "America/Chicago")
- (keyboard-layout (keyboard-layout "us"))
- (host-name "bs")
- (hosts-file (plain-file "hosts" %hosts-file))
- (kernel linux)
- ;;(kernel linux-bpf-sched-ext)
- ;;(kernel-loadable-modules (list digimend-module-linux))
- (firmware (list linux-firmware))
- (initrd microcode-initrd)
- (users (cons* (user-account
-                (name "dissoc")
-                (comment "Dissoc")
-                (group "users")
-                (home-directory "/home/dissoc")
-                (supplementary-groups
-                 '("wheel" "netdev" "audio" "video" "lp" "dialout")))
-               %base-user-accounts))
- (packages
-  (append
-   (list stumpwm
-         sbcl-stumpwm-ttf-fonts
-         font-dejavu
-         (specification->package "nss-certs"))
-   %base-packages))
- (services
-  (append
-   (list
-    (static-networking-service
-     "eno1" %host-ip
-     #:netmask %netmask
-     #:gateway %gateway
-     #:name-servers %name-servers)
-    (service ntp-service-type)
-    (service openssh-service-type)
-    (elogind-service)
-    (service slim-service-type
-             (slim-configuration
-              (auto-login? #t)
-              (auto-login-session (file-append stumpwm "/bin/stumpwm"))
-              (default-user "dissoc")
-              (display ":0")
-              (vt "vt7")
-              (xorg-configuration
-               (xorg-configuration
-                (extra-config '(%gaomon-m10k-xorg-file)))))))
-   (customize-services %base-services)))
- (bootloader
-  (bootloader-configuration
-   (bootloader grub-bootloader)
-   (target "/dev/sdb")
-   (keyboard-layout keyboard-layout)))
- (mapped-devices
-  (list (mapped-device
-         (source
-          (uuid "4cc40178-2b40-4d33-9e37-bc073550f0a3"))
-         (target "cryptroot")
-         (type luks-device-mapping))))
- (file-systems
-  (cons* (file-system
-          (mount-point "/")
-          (device "/dev/mapper/cryptroot")
-          (type "ext4")
-          (dependencies mapped-devices))
-         %base-file-systems)))
+;;     # allow icmp
+;;     # ip protocol icmp accept
+;;     # ip6 nexthdr icmpv6 accept
+
+;;     # allow ssh
+;;     tcp dport ssh accept
+
+;;     # allow vpn connections from
+;;     # whitelisted set
+;;     udp dport { $VPN_PORT } ip saddr $VPN_ALLOW accept
+;;     # reject everything else
+;;     # reject with icmpx type port-unreachable
+;;     # in some cases drop can be better than reject
+;;     # this can prevent a response going to a spoofed IP
+;;     drop
+;;   }
+;;   chain forward {
+;;     type filter hook forward priority 0; policy drop;
+;;   }
+;;   chain output {
+;;     type filter hook output priority 0; policy accept;
+;;   }
+;; }")
+
+;; (define %nftables-ruleset
+;;   (plain-file "nftables.conf"
+;;               (string-join (list %nftables-rules
+;;                                  %ntables-portknocking) "\n")))
+
+;; (define %gaomon-m10k-xorg-file
+;;   "Identifier \"Tablet\"
+;;   Driver \"wacom\"
+;;   MatchDevicePath \"/dev/input/event*\"
+;;   MatchUSBID \"256c:0064\"
+;;   EndSection")
+
+;; (define (customize-services services)
+;;   ((compose (lambda (s)
+;;               (remove
+;;                (lambda (service)
+;;                  (or (eq? (service-kind service) gdm-service-type)
+;;                      (eq? (service-kind service) sysctl-service-type)
+;;                      (eq? (service-kind service) network-manager-service-type)))
+;;                s))
+;;             (lambda (s)
+;;               (modify-services
+;;                s
+;;                (udev-service-type
+;;                 config =>
+;;                 (udev-configuration
+;;                  (inherit config)
+;;                  (rules
+;;                   (append
+;;                    (udev-configuration-rules config)
+;;                    (list %gaomon-m10k-udev-rule
+;;                          %ucore-tracer-udev-rule
+;;                          %lilygo-ttgo-udev-rule
+;;                          %de-5000-udev-rule)))))))
+;;             (lambda (s)
+;;               (modify-services
+;;                s
+;;                (guix-service-type
+;;                 config =>
+;;                 (guix-configuration
+;;                  (inherit config)
+;;                  (extra-options
+;;                   '("--cores=10"))
+;;                  (authorized-keys
+;;                   (append
+;;                    (guix-configuration-authorized-keys config)
+;;                    (list (local-file "/etc/guix/signing-key.pub")))))))))
+;;    services))
+
+;; (operating-system
+;;  (locale "en_US.utf8")
+;;  (timezone "America/Chicago")
+;;  (keyboard-layout (keyboard-layout "us"))
+;;  (host-name "bs")
+;;  (hosts-file (plain-file "hosts" %hosts-file))
+;;  (kernel linux)
+;;  ;;(kernel linux-bpf-sched-ext)
+;;  ;;(kernel-loadable-modules (list digimend-module-linux))
+;;  (firmware (list linux-firmware))
+;;  (initrd microcode-initrd)
+;;  (users (cons* (user-account
+;;                 (name "dissoc")
+;;                 (comment "Dissoc")
+;;                 (group "users")
+;;                 (home-directory "/home/dissoc")
+;;                 (supplementary-groups
+;;                  '("wheel" "netdev" "audio" "video" "lp" "dialout")))
+;;                %base-user-accounts))
+;;  (packages
+;;   (append
+;;    (list stumpwm
+;;          sbcl-stumpwm-ttf-fonts
+;;          font-dejavu
+;;          (specification->package "nss-certs"))
+;;    %base-packages))
+;;  (services
+;;   (append
+;;    (list
+;;     (static-networking-service
+;;      "eno1" %host-ip
+;;      #:netmask %netmask
+;;      #:gateway %gateway
+;;      #:name-servers %name-servers)
+;;     (service ntp-service-type)
+;;     (service openssh-service-type)
+;;     (elogind-service)
+;;     (service slim-service-type
+;;              (slim-configuration
+;;               (auto-login? #t)
+;;               (auto-login-session (file-append stumpwm "/bin/stumpwm"))
+;;               (default-user "dissoc")
+;;               (display ":0")
+;;               (vt "vt7")
+;;               (xorg-configuration
+;;                (xorg-configuration
+;;                 (extra-config '(%gaomon-m10k-xorg-file)))))))
+;;    (customize-services %base-services)))
+;;  (bootloader
+;;   (bootloader-configuration
+;;    (bootloader grub-bootloader)
+;;    (target "/dev/sdb")
+;;    (keyboard-layout keyboard-layout)))
+;;  (mapped-devices
+;;   (list (mapped-device
+;;          (source
+;;           (uuid "4cc40178-2b40-4d33-9e37-bc073550f0a3"))
+;;          (target "cryptroot")
+;;          (type luks-device-mapping))))
+;;  (file-systems
+;;   (cons* (file-system
+;;           (mount-point "/")
+;;           (device "/dev/mapper/cryptroot")
+;;           (type "ext4")
+;;           (dependencies mapped-devices))
+;;          %base-file-systems)))
