@@ -1,4 +1,7 @@
-(define %ucore-tracer-udev-rule
+(define-module (dissoc confs udev rules)
+  #:use-module (gnu services base))
+
+(define-public %ucore-tracer-udev-rule
   (udev-rule
    "90-ucore-tracer.rules"
    (string-append "SUBSYSTEM==\"usb\", "
@@ -7,7 +10,7 @@
                   "GROUP=\"users\", "
                   "MODE=\"0666\"")))
 
-(define %de-5000-udev-rule
+(define-public %de-5000-udev-rule
   (udev-rule
    "90-de-5000.rules"
    (string-append "SUBSYSTEM==\"usb\", "
@@ -16,7 +19,7 @@
                   "GROUP=\"users\", "
                   "MODE=\"0666\"")))
 
-(define %bk-393-udev-rule
+(define-public %bk-393-udev-rule
   (udev-rule
    "90-bk-393.rules"
    (string-append "SUBSYSTEM==\"usb\", "
@@ -25,7 +28,7 @@
                   "GROUP=\"users\", "
                   "MODE=\"0666\"")))
 
-(define %lilygo-ttgo-udev-rule
+(define-public %lilygo-ttgo-udev-rule
   (udev-rule
    "90-lilygo-ttgo.rules"
    (string-append "SUBSYSTEM==\"usb\", "
@@ -34,7 +37,7 @@
                   "GROUP=\"users\", "
                   "MODE=\"0666\"")))
 
-(define %gaomon-m10k-udev-rule
+(define-public %gaomon-m10k-udev-rule
   (udev-rule
    "90-gaomon-m10k.rules"
    (string-append "SUBSYSTEM==\"usb\", "

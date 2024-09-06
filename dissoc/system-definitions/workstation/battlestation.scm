@@ -4,48 +4,102 @@
 ;; files stored in the "vault". Otherise it will require modification for
 ;; use, especially where variables are used.
 
-(define-module (dissoc-guix-confs system-definitions workstation battlestation))
-(use-modules
- (gnu packages databases)
- (gnu packages radio)
- (gnu packages terminals)
- (gnu packages suckless)
- (gnu packages java)
- (gnu packages wm)
- (dissoc private packages tablet)
- (dissoc private packages linux)
- (gnu services desktop)
- (gnu system setuid)
- (gnu)
- (nongnu packages linux)
- (nongnu system linux-initrd)
- (srfi srfi-1))
-(use-package-modules fonts lisp-xyz cups)
-(use-service-modules admin
-                     audio
-                     auditd
-                     avahi
-                     base
-                     certbot
-                     cups
-                     databases
-                     dbus
-                     desktop
-                     docker
-                     monitoring
-                     networking
-                     nix
-                     sound
-                     ssh
-                     sysctl
-                     syncthing
-                     virtualization
-                     vpn
-                     web
-                     xorg)
+(define-module (dissoc system-definitions workstation battlestation)
+  #:use-module (gnu packages terminals)
+  #:use-module (gnu packages wm)
+  #:use-module (gnu packages fonts)
+  #:use-module (gnu services)
+  #:use-module (gnu packages)
+  #:use-module (gnu bootloader)
+  #:use-module (gnu bootloader grub)
+  #:use-module (gnu system)
+  #:use-module (gnu system uuid)
+  ;;#:use-module (srfi srfi-9 gnu)
+  #:use-module (gnu system keyboard)
+  #:use-module (gnu system accounts)
+  #:use-module (gnu system file-systems)
+  #:use-module (gnu system mapped-devices)
+  #:use-module (gnu system shadow)
+  #:use-module (guix gexp)
+  #:use-module (srfi srfi-1)
+  #:use-module (dissoc confs nftables clouldflare)
+  #:use-module (dissoc confs nftables portknocking)
+  #:use-module (dissoc confs udev rules)
+  #:use-module (nongnu packages linux)
+
+
+
+
+
+
+  ;; #:use-module (guix store)
+  ;; #:use-module (guix monads)
+  ;; #:use-module (guix records)
+  ;; #:use-module (guix combinators)
+  ;; #:use-module (guix derivations)
+  ;; #:use-module ((guix utils) #:select (%current-system target-hurd?))
+  ;; #:use-module (guix sets)
+  ;; #:use-module (guix gexp)
+  ;; #:use-module (srfi srfi-1)
+  ;; #:use-module (srfi srfi-9 gnu)
+  ;; #:use-module (srfi srfi-26)
+  ;; #:use-module (srfi srfi-34)
+  ;; #:use-module (srfi srfi-71)
+  ;; #:use-module (ice-9 match)
+  ;; #:use-module (ice-9 vlist)
+
+
+
+
+
+;;  #:use-module (gnu)
+  ;; #:use-module
+  ;; #:use-module
+  ;; #:use-module
+  ;; #:use-module
+  ;; #:use-module
+  ;; #:use-module
+
+  )
+
+
+
+;; (use-modules
+;;  (gnu packages terminals)
+;;  (gnu packages wm)
+;;  (gnu services desktop)
+;;  (gnu system setuid)
+;;  (gnu)
+;;  ;; (nongnu packages linux)
+;;  ;; (nongnu system linux-initrd)
+;;  (srfi srfi-1))
+;; (use-package-modules fonts lisp-xyz cups)
+;; (use-service-modules admin
+;;                      audio
+;;                      auditd
+;;                      avahi
+;;                      base
+;;                      certbot
+;;                      cups
+;;                      databases
+;;                      dbus
+;;                      desktop
+;;                      docker
+;;                      monitoring
+;;                      networking
+;;                      nix
+;;                      sound
+;;                      ssh
+;;                      sysctl
+;;                      syncthing
+;;                      virtualization
+;;                      vpn
+;;                      web
+;;                      xorg)
 
 ;; this is where system variables are store. i.g. ip address
 (load "/mnt/vault/configs/systems/battlestation.scm")
+(load "../../confs/nftables/clouldflare.scm")
 
 (define %nftables-rules
   "# A simple and safe firewall
@@ -128,9 +182,7 @@ table inet filter {
                  (rules
                   (append
                    (udev-configuration-rules config)
-                   (list hackrf
-                         rtl-sdr
-                         %gaomon-m10k-udev-rule
+                   (list %gaomon-m10k-udev-rule
                          %ucore-tracer-udev-rule
                          %lilygo-ttgo-udev-rule
                          %de-5000-udev-rule)))))))
@@ -155,8 +207,9 @@ table inet filter {
  (keyboard-layout (keyboard-layout "us"))
  (host-name "bs")
  (hosts-file (plain-file "hosts" %hosts-file))
- (kernel linux-bpf-sched-ext)
- (kernel-loadable-modules (list digimend-module-linux))
+ (kernel linux)
+ ;;(kernel linux-bpf-sched-ext)
+ ;;(kernel-loadable-modules (list digimend-module-linux))
  (firmware (list linux-firmware))
  (initrd microcode-initrd)
  (users (cons* (user-account
