@@ -3,7 +3,7 @@
 ;; ;; NOTE: this definition will not build without access to private
 ;; ;; files stored in the "vault". Otherise it will require modification for
 ;; ;; use, especially where variables are used.
-
+(define-module (dissoc system-definitions workstation battlestation))
 ;; (define-module (dissoc system-definitions workstation battlestation)
 ;;   #:use-module (gnu packages terminals)
 ;;   #:use-module (gnu packages wm)
