@@ -1,4 +1,4 @@
-;; (define-module (dissoc confs system-definitions workstations battlestation os))
+(define-module (dissoc confs system-definitions workstations battlestation os))
 ;; (
 
 ;;  use-modules ;;(guix-hardened hardened sysctl)
