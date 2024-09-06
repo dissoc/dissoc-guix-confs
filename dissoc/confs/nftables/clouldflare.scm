@@ -1,4 +1,4 @@
-(define-module (dissoc confs nftables clouldflare))
+(define-module (dissoc confs nftables cloudflare))
 
 (define %nftables-allow-cloudflare
   "
