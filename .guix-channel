@@ -9,4 +9,12 @@
     (channel-introduction
      (version 0)
      (commit "eeb7e6748f7db8dced413a513da1ea48ffcf7dd7")
-     (signer "95D3 7A96 EC54 79CE 6082  5831 81FF 5EC7 66ED 8C39"))))))
+     (signer "95D3 7A96 EC54 79CE 6082  5831 81FF 5EC7 66ED 8C39"))))
+  (channel
+   (name nonguix)
+   (url "https://gitlab.com/nonguix/nonguix")
+   (introduction
+    (channel-introduction
+     (version 0)
+     (commit "897c1a470da759236cc11798f4e0a5f7d4d59fbc")
+     (signer "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))))
