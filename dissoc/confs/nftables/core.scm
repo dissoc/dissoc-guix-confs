@@ -1,6 +1,6 @@
 (define-module (dissoc confs nftables core))
 
-(define (generate-nftable-rules ip-allow port-allow)
+(define-public (generate-nftable-rules ip-allow port-allow)
   (string-append
    "# A simple and safe firewall
 define VPN_ALLOW = { " ip-allow " }
@@ -52,7 +52,7 @@ table inet filter {
   }
 }"))
 
-(define (port-redirect dport redirect-port)
+(define-public (port-redirect dport redirect-port)
   (string-append
    "table ip nat {
   chain prerouting {
