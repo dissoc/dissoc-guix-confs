@@ -1,4 +1,4 @@
- (define-module (dissoc confs udev rules)
+(define-module (dissoc confs udev rules)
   #:use-module (gnu services base))
 
 (define-public %ucore-tracer-udev-rule
