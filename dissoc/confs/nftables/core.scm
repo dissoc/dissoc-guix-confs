@@ -51,3 +51,12 @@ table inet filter {
     type filter hook output priority 0; policy accept;
   }
 }"))
+
+(define (port-redirect dport redirect-port)
+  (string-append
+   "table ip nat {
+  chain prerouting {
+    type nat hook prerouting priority 100; policy accept;
+    iif eth0 tcp dport { " dport " } counter redirect to " redirect-port "
+  }
+}"))
