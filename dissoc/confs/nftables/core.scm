@@ -37,7 +37,7 @@ table inet filter {
 
     # allow vpn connections from
     # whitelisted set
-    udp dport { $VPN_PORT } ip saddr $VPN_ALLOW accept
+    udp dport { $VPN_PORT } ip saddr { $VPN_ALLOW } accept
     # reject everything else
     # reject with icmpx type port-unreachable
     # in some cases drop can be better than reject
