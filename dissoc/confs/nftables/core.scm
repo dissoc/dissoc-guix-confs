@@ -4,7 +4,7 @@
   (string-append
    "# A simple and safe firewall
 define VPN_ALLOW = { " ip-allow " }
-define VPN_PORT = " port-allow "
+define VPN_PORT = { " port-allow " }
 table inet filter {
 
   # create the set for blocked
