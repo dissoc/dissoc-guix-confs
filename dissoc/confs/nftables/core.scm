@@ -14,6 +14,13 @@ table inet filter {
     typeof ip daddr
   }
 
+   set tcp_allowed_ports {
+        type inet_service
+        flags interval
+        elements = { 22 }
+    }
+
+
   chain input {
     type filter hook input priority 0; policy drop;
 
@@ -34,10 +41,14 @@ table inet filter {
 
     # allow ssh
     tcp dport ssh accept
+    # provide a set that can be altered
+    # when a system is running
+    # NOTE the security implications
+    tcp dport @tcp_allowed_ports accept
 
     # allow vpn connections from
     # whitelisted set
-    #udp dport { $VPN_PORT } ip saddr { $VPN_ALLOW } accept
+    # udp dport { $VPN_PORT } ip saddr { $VPN_ALLOW } accept
     # reject everything else
     # reject with icmpx type port-unreachable
     # in some cases drop can be better than reject
